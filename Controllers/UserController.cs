@@ -33,7 +33,7 @@ namespace FitnessChallenge.Controllers
                 if(returnedUser == null)
                 {
                     ViewData["error"] = "email not registered, please sign up";
-                    return View("index");
+                    return View("Index");
                 }
 
                 var Hasher = new PasswordHasher<User>();
@@ -43,9 +43,9 @@ namespace FitnessChallenge.Controllers
                     return RedirectToAction("HomePage", "HomePage");
                 }
                 ViewData["error"] = "username/password incorrect";
-                return View("index");
+                return View("Index");
             }
-            return View("index");
+            return View("Index");
         }
 
         [HttpGet("register")]
@@ -66,20 +66,20 @@ namespace FitnessChallenge.Controllers
                     if(returnedUser != null)
                     {
                         ViewData["error"] = "email already registered, please sign in.";
-                        return View("register");
+                        return View("Register");
                     }
                     User nicknameCheck = _context.users.Where(p => p.nickname == submittedUser.nickname).FirstOrDefault();
 
                     if(nicknameCheck != null)
                     {
                         ViewData["error"] = "nickname already taken, please choose another";
-                        return View("register");
+                        return View("Register");
                     }
 
                     if(submittedUser.password != submittedUser.confirm_pw)
                     {
                         ViewData["error"] = "passwords don't match";
-                        return View("register");
+                        return View("Register");
                     }
 
                     PasswordHasher<User> Hasher = new PasswordHasher<User>();
@@ -93,7 +93,7 @@ namespace FitnessChallenge.Controllers
 
                     return RedirectToAction("SelectAvatar");
                 }
-            return View("register");
+            return View("Register");
             }
             return RedirectToAction("HomePage", "HomePage");
         }
@@ -124,7 +124,7 @@ namespace FitnessChallenge.Controllers
                 return RedirectToAction("HomePage", "HomePage");
             }
             
-            return RedirectToAction("index");
+            return RedirectToAction("Index");
         }
 
         [HttpGet("logout")]
