@@ -12,15 +12,11 @@
 <p style="font-style:italic; text-align:right; font-size:14px; margin-left:350px; margin-bottom:10px;">*actual photo of Matt on 6/13/19</p>
 </div>
 <hr style="max-width: 900px; margin-top:0px;">
-<<<<<<< HEAD:Views/HomePage/HomePage.cshtml
-=======
 @{
     int avatarid = @Model.user.avatar_id;
     string src = $"../img/avatars/avatar_{avatarid}.jpg";
     <img style="width: 100px; display: inline;" src="@src" alt="pic">
 }
-
->>>>>>> e25405d59d2a243cbdc888ccd2062d2ee5a42827:Views/HomePage/homepage.cshtml
 
 
 <h1 style="margin-top: 10px; margin-bottom:10px;text-align:center;">Welcome to fitness headquarters, @Model.user.nickname!</h1>
