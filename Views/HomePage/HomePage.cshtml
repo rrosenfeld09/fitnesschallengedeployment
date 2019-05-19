@@ -19,7 +19,8 @@
 }
 
 
-<h1 style="margin-top: 10px; margin-bottom:10px;text-align:center;">Welcome to fitness headquarters, @Model.user.nickname!</h1>
+
+<h1 style="margin-top: 10px; margin-bottom:10px;">Welcome to fitness headquarters, @Model.user.nickname!</h1>
 <div style="text-align:center;">
 <div style="margin-left: 10px; display:inline-block; margin-right:30px;">
     <h3 style="text-decoration:underline;">Your Point Breakdown:</h3>
@@ -36,7 +37,7 @@
         {
             int avatarid_3 = @user.avatar_id;
             string src_3 = $"../img/avatars/avatar_{avatarid_3}.jpg";
-            <li style="font-family: 'Catamaran', 'Helvetica', 'Arial', 'sans-serif'; font-weight:200; letter-spacing:1px;" >@user.nickname (@user.total_points pts)</li>
+            <li style="font-family: 'Catamaran', 'Helvetica', 'Arial', 'sans-serif'; font-weight:200; letter-spacing:1px;" >@user.nickname (@user.total_points pts) <img style="width:30px; vertical-align:middle;" src="@src_3" alt="avatar"></li>
         }
     }
     </ol>  
@@ -77,18 +78,34 @@
         <input style="background-color:greenyellow; width:338px;" type="submit" value="I worked out today (1 pt)">
     </form>
 </fieldset>
+<fieldset style="display:inline-block; vertical-align:top;">
+    <legend>Stretching</legend>
+    <form style="margin-bottom: 10px; " action="/add_points" method="POST">
+        <input type="hidden" name="user_id" value="@Model.user.user_id">
+        <input type="hidden" name="point_type" value="exercise_point">
+        <input type="hidden" name="point_value" value=".5">
+        <input type="hidden" name="description" value = "stretching">
+        <input style="background-color:greenyellow; width:338px;" type="submit" value="I stretched today (.5 pts)">
+    </form>
+</fieldset>
 </div>
 <div style="text-align:center;">
 
 
 <fieldset style="display:inline-block; vertical-align:top;">
     <legend>Consume Right</legend>
+    <div>
     <form  action="/add_points" method="POST">
         <input type="hidden" name="user_id" value="@Model.user.user_id">
         <input type="hidden" name="point_type" value="eating_point">
-        <input type="hidden" name="point_value" value=".5">
-        <input type="hidden" name="description" value = "ate healthy meal">
-        <input style="background-color:greenyellow; width:338px;" type="submit" value="I ate a healthy meal (.5 pt)">
+        <input type="hidden" name="description" value = "eating healthy meals">
+        <select name="point_value" style="background-color: bisque;">
+            <option value=".5">1 Healthy Meal</option>
+            <option value="1">2 Healthy Meals</option>
+            <option value="1.5">3 Healthy Meals</option>
+        </select>
+        <input style="background-color:greenyellow; width:225px; padding:0px;" type="submit" value="Log my meals (.5 pt/meal)">
+    </div>
     <form  action="/add_points" method="POST">
         <input type="hidden" name="user_id" value="@Model.user.user_id">
         <input type="hidden" name="point_type" value="eating_point">
@@ -119,7 +136,7 @@
                 string src_2 = $"../img/avatars/avatar_{avatarid_2}.jpg";
             
             <p style="display:inline-block; margin:2px;">@comment.comment - <div style="display:inline-block; font-style:italic; margin:0px;">@comment.user_nickname </div>
-                </p>
+                <img style="width:30px;" src="@src_2" alt="avatar"></p>
             if(@Model.user.user_id == @comment.user_id)
             {
                 <p style="margin-bottom:0px; margin-top:0px; font-size:13px; font-style:italic;"><a href="/delete/@comment.comment_id/@comment.user_id">delete post</a></p> 
